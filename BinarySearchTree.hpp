@@ -290,6 +290,7 @@ public:
 string BFT () {
   queue<pair<BinaryNode*, int>> Q;
   string res = "[";   // this is to add the opening bracket
+  // res += "[";
 
   if (root != nullptr) Q.push({root, 0});
 
@@ -301,15 +302,16 @@ string BFT () {
     Q.pop();
 
     if (u.first == nullptr)
-    continue;   // this is to skip any possible null nodes
+    continue;   // this is to skip any possible null node
 
-    if (u.second < level) {
+    else if (u.second < level) {
       res += "]";
       level = u.second;
       first_in_level = false;
+      std:: cout << "I'm entering!! The level is: " << level << endl;
     }
 
-    if (first_in_level) {
+    else if (first_in_level) {
       res += "[";
       first_in_level = false;
     }
@@ -318,16 +320,16 @@ string BFT () {
     }
 
     res += std::to_string(u.first->element);
-
-    // pushing the kids into the line
-    if (u.first->left) Q.push({u.first->left, u.second + 1});
-
-    if (u.first->right) Q.push({u.first->right, u.second + 1});
     
 
     // std::cerr << "processing node: " 
     //       << (u.first ? std::to_string(u.first->element) : "NULL") 
     //       << " at level " << u.second << std::endl;
+
+    // pushing the kids into the line
+    if (u.first->left) Q.push({u.first->left, u.second + 1});
+
+    if (u.first->right) Q.push({u.first->right, u.second + 1});
 
   }
 
@@ -335,6 +337,8 @@ string BFT () {
   res.push_back(']');
 
   std::cout << res << std::endl;
+
+  std::cout << "this did not enter lmao" << endl;
 
   return res;
 }

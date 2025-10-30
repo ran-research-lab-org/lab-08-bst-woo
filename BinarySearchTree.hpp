@@ -295,33 +295,35 @@ string BFT () const {
   
   while (!Q.empty) {
     u = Q.front();
-    int level = u.second;
     Q.pop();
     res += "["
 
-    // if (level == 0) {
-    //   res += u.first;
-    //   res += "], ";
-    // }
-
     if (u->left) {
       Q.push({u.first->left, u.second + 1});
-      res += u.first->left;
-      res += ", ";
-      res += u.second + 1;
+      int leftie = u.second + 1;
     }
 
     if (u->right) {
       Q.push({u.first->right, u.second + 1});
-      res += u.first->right;
-      res += ", ";
-      res += u.second + 1;
+      int rightie = u.second + 1;
     }
 
-    if 
+    if (leftie == rightie) {
+      res += "[";
+      res += std::to_string(u.first->right);  
+      res += ", ";
+      res += std::to_string(u.first->left);  
+      res += "]";
+    }
+
+    else {
+      res += "]";
+    }
   }
 
   res.push_back(']');
+
+  std::cout << res << std::endl;
 
   return res;
 }

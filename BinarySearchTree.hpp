@@ -5,6 +5,8 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <queue>
+
 using namespace std;
 
 template <typename T> string toStr(const T &value) {
@@ -278,6 +280,8 @@ private:
       return new BinaryNode{t->element, clone(t->left), clone(t->right)};
   }
 };
+
+// function to make queues
 
 #endif
 

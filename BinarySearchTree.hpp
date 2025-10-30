@@ -299,17 +299,16 @@ string BFT () const {
     Q.pop();
     res += "["
 
-    if (level == 0) {
-      res += u.first;
-      res += "], ";
-    }
+    // if (level == 0) {
+    //   res += u.first;
+    //   res += "], ";
+    // }
 
-    else if (u->left) {
+    if (u->left) {
       Q.push({u.first->left, u.second + 1});
-      
     }
 
-    else if (u->right) {
+    if (u->right) {
       Q.push({u.first->right, u.second + 1});
     }
   }

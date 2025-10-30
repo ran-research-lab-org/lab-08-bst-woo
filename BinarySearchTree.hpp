@@ -306,7 +306,7 @@ string BFT () {
     if (u.second < level) {
       res += "]";
       level = u.second;
-      first_in_level = false
+      first_in_level = false;
     }
 
     if (first_in_level) {
@@ -314,7 +314,7 @@ string BFT () {
       first_in_level = false;
     }
     else {
-      res += ","
+      res += ",";
     }
 
     res += std::to_string(u.first->element);
@@ -325,9 +325,9 @@ string BFT () {
     if (u.first->right) Q.push({u.first->right, u.second + 1});
     
 
-    std::cerr << "Processing node: " 
-          << (u.first ? std::to_string(u.first->element) : "NULL") 
-          << " at level " << u.second << std::endl;
+    // std::cerr << "processing node: " 
+    //       << (u.first ? std::to_string(u.first->element) : "NULL") 
+    //       << " at level " << u.second << std::endl;
 
   }
 

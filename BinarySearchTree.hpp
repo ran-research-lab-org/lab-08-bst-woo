@@ -281,7 +281,43 @@ private:
   }
 };
 
-// function to make queues
+// breadth-first traversal function
+
+/* para hacerlo print con corchetes, puedo llevar un conteo de donde estoy, 
+y al cambiar de nivel, lo detecta por automático, añadiendo luego un
+corchete + paréntesis */ 
+
+string BFT () const {
+  queue<pair<BinaryNode*, int>> Q;
+  string res = "[";
+
+  if (root != nullptr) Q.push({root, 0});
+  
+  while (!Q.empty) {
+    u = Q.front();
+    int level = u.second;
+    Q.pop();
+    res += "["
+
+    if (level == 0) {
+      res += u.first;
+      res += "], ";
+    }
+
+    else if (u->left) {
+      Q.push({u.first->left, u.second + 1});
+      
+    }
+
+    else if (u->right) {
+      Q.push({u.first->right, u.second + 1});
+    }
+  }
+
+  res.push_back(']');
+
+  return res;
+}
 
 #endif
 

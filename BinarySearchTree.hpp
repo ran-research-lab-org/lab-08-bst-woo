@@ -306,11 +306,19 @@ string BFT () const {
 
     if (u->left) {
       Q.push({u.first->left, u.second + 1});
+      res += u.first->left;
+      res += ", ";
+      res += u.second + 1;
     }
 
     if (u->right) {
       Q.push({u.first->right, u.second + 1});
+      res += u.first->right;
+      res += ", ";
+      res += u.second + 1;
     }
+
+    if 
   }
 
   res.push_back(']');

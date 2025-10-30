@@ -279,54 +279,70 @@ private:
     else
       return new BinaryNode{t->element, clone(t->left), clone(t->right)};
   }
-};
 
-// breadth-first traversal function
+  // breadth-first traversal function
 
 /* para hacerlo print con corchetes, puedo llevar un conteo de donde estoy, 
 y al cambiar de nivel, lo detecta por automático, añadiendo luego un
 corchete + paréntesis */ 
 
-string BFT () const {
+public: 
+string BFT () {
   queue<pair<BinaryNode*, int>> Q;
-  string res = "[";
+  string res = "[";   // this is to add the opening bracket
 
   if (root != nullptr) Q.push({root, 0});
+
+  int level = 0;
+  bool first_in_level = false;
   
-  while (!Q.empty) {
-    u = Q.front();
+  while (!Q.empty()) {
+    auto u = Q.front();
     Q.pop();
-    res += "["
 
-    if (u->left) {
-      Q.push({u.first->left, u.second + 1});
-      int leftie = u.second + 1;
+    if (u.first == nullptr)
+    continue;   // this is to skip any possible null nodes
+
+    if (u.second < level) {
+      res += "]";
+      level = u.second;
+      first_in_level = false
     }
 
-    if (u->right) {
-      Q.push({u.first->right, u.second + 1});
-      int rightie = u.second + 1;
-    }
-
-    if (leftie == rightie) {
+    if (first_in_level) {
       res += "[";
-      res += std::to_string(u.first->right);  
-      res += ", ";
-      res += std::to_string(u.first->left);  
-      res += "]";
+      first_in_level = false;
+    }
+    else {
+      res += ","
     }
 
-    else {
-      res += "]";
-    }
+    res += std::to_string(u.first->element);
+
+    // pushing the kids into the line
+    if (u.first->left) Q.push({u.first->left, u.second + 1});
+
+    if (u.first->right) Q.push({u.first->right, u.second + 1});
+    
+
+    std::cerr << "Processing node: " 
+          << (u.first ? std::to_string(u.first->element) : "NULL") 
+          << " at level " << u.second << std::endl;
+
   }
 
+  res.push_back(']');
   res.push_back(']');
 
   std::cout << res << std::endl;
 
   return res;
 }
+
+
+};
+
+
 
 #endif
 

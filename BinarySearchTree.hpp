@@ -5,6 +5,8 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <queue>
+
 using namespace std;
 
 template <typename T> string toStr(const T &value) {
@@ -277,7 +279,75 @@ private:
     else
       return new BinaryNode{t->element, clone(t->left), clone(t->right)};
   }
+
+  // breadth-first traversal function
+
+/* para hacerlo print con corchetes, puedo llevar un conteo de donde estoy, 
+y al cambiar de nivel, lo detecta por automático, añadiendo luego un
+corchete + paréntesis */ 
+
+public: 
+string BFT () {
+  queue<pair<BinaryNode*, int>> Q;
+  string res = "[";   // this is to add the opening bracket
+  // res += "[";
+
+  if (root != nullptr) Q.push({root, 0});
+
+  int level = 0;
+  bool first_in_level = true;
+  
+  while (!Q.empty()) {
+    auto u = Q.front();
+    Q.pop();
+
+    if (u.first == nullptr)
+    continue;   // this is to skip any possible null node
+
+    if (u.second > level) {
+      res += "]";
+      level = u.second;
+      first_in_level = false;
+      std:: cout << "I'm entering!! The level is: " << level << endl;
+    }
+
+    if (first_in_level == true) {
+      res += "[";
+      // first_in_level = false;
+      // std:: cout << "whoa! it entered!" << endl;
+    }
+    else if (!first_in_level) {
+      res += ",";
+    }
+
+    res += std::to_string(u.first->element);
+    
+
+    // std::cerr << "processing node: " 
+    //       << (u.first ? std::to_string(u.first->element) : "NULL") 
+    //       << " at level " << u.second << std::endl;
+
+    // pushing the kids into the line
+    if (u.first->left) Q.push({u.first->left, u.second + 1});
+
+    if (u.first->right) Q.push({u.first->right, u.second + 1});
+
+  }
+
+  res.push_back(']');
+  res.push_back(']');
+
+  std::cout << res << std::endl;
+
+  std::cout << "this did not enter lmao" << endl;
+
+  return res;
+}
+
+
 };
+
+
 
 #endif
 

@@ -295,7 +295,7 @@ string BFT () {
   if (root != nullptr) Q.push({root, 0});
 
   int level = 0;
-  bool first_in_level = false;
+  bool first_in_level = true;
   
   while (!Q.empty()) {
     auto u = Q.front();
@@ -304,18 +304,19 @@ string BFT () {
     if (u.first == nullptr)
     continue;   // this is to skip any possible null node
 
-    else if (u.second < level) {
+    if (u.second > level) {
       res += "]";
       level = u.second;
       first_in_level = false;
       std:: cout << "I'm entering!! The level is: " << level << endl;
     }
 
-    else if (first_in_level) {
+    if (first_in_level == true) {
       res += "[";
-      first_in_level = false;
+      // first_in_level = false;
+      // std:: cout << "whoa! it entered!" << endl;
     }
-    else {
+    else if (!first_in_level) {
       res += ",";
     }
 

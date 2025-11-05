@@ -310,15 +310,15 @@ string BFT () {
       res += ",";
       level = u.second;
       first_in_level = true;
-      std:: cout << "I'm entering!! The level is: " << level << endl;
+      // std:: cout << "I'm entering!! The level is: " << level << endl;
     }
 
     if (first_in_level == true) {
       res += "[";
       count += 1;
       first_in_level = false;
-      std:: cout << "whoa! it entered this many times: ";
-      std:: cout << count << endl;
+      // std:: cout << "whoa! it entered this many times: ";
+      // std:: cout << count << endl;
     }
     else if (!first_in_level) {
       res += ",";

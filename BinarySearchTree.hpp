@@ -296,6 +296,7 @@ string BFT () {
 
   int level = 0;
   bool first_in_level = true;
+  int count = 0;
   
   while (!Q.empty()) {
     auto u = Q.front();
@@ -306,15 +307,18 @@ string BFT () {
 
     if (u.second > level) {
       res += "]";
+      res += ",";
       level = u.second;
-      first_in_level = false;
+      first_in_level = true;
       std:: cout << "I'm entering!! The level is: " << level << endl;
     }
 
     if (first_in_level == true) {
       res += "[";
-      // first_in_level = false;
-      // std:: cout << "whoa! it entered!" << endl;
+      count += 1;
+      first_in_level = false;
+      std:: cout << "whoa! it entered this many times: ";
+      std:: cout << count << endl;
     }
     else if (!first_in_level) {
       res += ",";
@@ -322,11 +326,6 @@ string BFT () {
 
     res += std::to_string(u.first->element);
     
-
-    // std::cerr << "processing node: " 
-    //       << (u.first ? std::to_string(u.first->element) : "NULL") 
-    //       << " at level " << u.second << std::endl;
-
     // pushing the kids into the line
     if (u.first->left) Q.push({u.first->left, u.second + 1});
 
@@ -339,7 +338,7 @@ string BFT () {
 
   std::cout << res << std::endl;
 
-  std::cout << "this did not enter lmao" << endl;
+  // std::cout << "this did not enter lmao" << endl;
 
   return res;
 }
